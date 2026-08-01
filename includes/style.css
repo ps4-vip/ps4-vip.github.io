@@ -68,7 +68,7 @@ body {
 
   font-family: Consolas, "Courier New", monospace;
 
-  font-size: 18px;
+  font-size: 20px;
 
   line-height: 1.5;
 
@@ -274,12 +274,13 @@ body {
 /* Checkbox Auto JB */
 
 .checkbox-container {
+  margin-top: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   color: #67dfff;
-  font-size: 14px;
+  font-size: 18px; /* ukuran tulisan AUTO JB */
   cursor: pointer;
   user-select: none;
 }
@@ -289,10 +290,10 @@ body {
 }
 
 .checkmark {
-  width: 16px;
-  height: 16px;
+  width: 24px; /* ukuran kotak */
+  height: 24px;
   border: 2px solid #67dfff;
-  border-radius: 3px;
+  border-radius: 4px;
   display: inline-block;
   position: relative;
   transition: 0.2s;
@@ -308,10 +309,10 @@ body {
 .checkbox-container input:checked + .checkmark::after {
   content: "";
   position: absolute;
-  left: 4px;
-  top: 0px;
-  width: 5px;
-  height: 10px;
+  left: 7px;
+  top: 2px;
+  width: 6px;
+  height: 12px;
   border: solid #001820;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
