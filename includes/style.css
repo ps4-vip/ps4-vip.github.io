@@ -114,7 +114,7 @@ body {
 .logo h1 {
   font-size: 34px;
 
-  font-weight: bold;
+  font-weight: 600;
 
   letter-spacing: 3px;
 }
@@ -316,4 +316,71 @@ body {
   border: solid #001820;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+}
+
+
+
+/* ZEEKO FX - Full Screen */
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.foreground {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.logo {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.logo-image {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  object-position: center center;
+  margin: 0;
+}
+
+/* النصوص الموجودة داخل الصورة هي النص الأساسي */
+.logo p {
+  display: none !important;
+}
+
+/* إخفاء عناصر التحكم */
+#jeilbrek,
+.auto-panel,
+#kernel-options,
+#countdown,
+#UA,
+.jb-button {
+  display: none !important;
+}
+
+/* إبقاء رسالة الحالة */
+#status {
+  display: block !important;
+  position: fixed;
+  left: 50%;
+  bottom: 8%;
+  transform: translateX(-50%);
+  width: 92vw;
+  text-align: center;
+  z-index: 9999;
+  font-size: clamp(14px, 2.2vw, 22px);
+  font-weight: bold;
+  white-space: nowrap;
+  color: #fff;\n  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }

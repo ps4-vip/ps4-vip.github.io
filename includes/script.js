@@ -39,6 +39,10 @@ jeilbrekBtn.addEventListener("click", function () {
 
   jeilbrekBtn.disabled = true;
 
+  if (window.zeekoShowLoading) {
+    window.zeekoShowLoading();
+  }
+
   doJb();
 });
 
@@ -91,6 +95,10 @@ function jailbreakCountdown() {
 
       jeilbrekBtn.disabled = true;
 
+      if (window.zeekoShowLoading) {
+        window.zeekoShowLoading();
+      }
+
       doJb();
     }
   }, 1000);
@@ -102,12 +110,30 @@ function jailbreakCountdown() {
 
 function cacheProgress(e) {
   const percent = Math.round((e.loaded / e.total) * 100);
+  const status = document.getElementById("status");
 
-  document.title = "Caching: " + percent + "%";
+  if (status) {
+    status.textContent =
+      "Installing offline cache: " + percent + "%";
+  }
+
+  document.title = "Installing offline cache: " + percent + "%";
 }
 
 function displayCacheProgress() {
+  const status = document.getElementById("status");
+
+  if (status) {
+    status.textContent = "Loading GoldHEN v2.4b18.10... Please Wait [100%]";
+  }
+
   setTimeout(function () {
+    if (status) {
+      status.textContent = "GoldHEN v2.4b18.10 Loaded Successfully ✓";
+      status.classList.remove("loading");
+      status.classList.add("success");
+    }
+
     document.title = "✓";
   }, 1000);
 
@@ -139,13 +165,17 @@ document.addEventListener("DOMContentLoaded", function () {
     lapseRadio.checked = true;
   }
 
-  // Auto JB
+  // ZEEKO FX - Automatic Jailbreak
 
-  checkbox.checked = autoJbValue;
+  checkbox.checked = true;
 
-  if (autoJbValue) {
-    jailbreakCountdown();
+  if (window.zeekoShowLoading) {
+    window.zeekoShowLoading();
   }
+
+  jeilbrekBtn.disabled = true;
+
+  doJb();
 });
 
 // ========================================================
@@ -167,3 +197,34 @@ if (consoleElement) {
     subtree: true,
   });
 }
+
+// ========================================================
+// ZEEKO FX Loading UI
+// ========================================================
+
+(function () {
+  const status = document.getElementById("status");
+
+  if (!status) return;
+
+  function showLoading() {
+    status.textContent =
+      "Loading GoldHEN v2.4b18.10... Please Wait";
+    status.classList.add("loading");
+  }
+
+  function showSuccess() {
+    status.textContent = "GoldHEN v2.4b18.10 Loaded Successfully ✓";
+    status.classList.remove("loading");
+    status.classList.add("success");
+  }
+
+  document.addEventListener("jb-success", showSuccess);
+
+  document.addEventListener("jb-failed", function () {
+    status.textContent = "Jailbreak Failed";
+    status.classList.remove("loading");
+  });
+
+  window.zeekoShowLoading = showLoading;
+})();
