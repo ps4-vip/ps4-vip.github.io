@@ -43,7 +43,10 @@ jeilbrekBtn.addEventListener("click", function () {
     window.zeekoShowLoading();
   }
 
+if (!navigator.onLine) {
   doJb();
+}
+
 });
 
 // ========================================================
