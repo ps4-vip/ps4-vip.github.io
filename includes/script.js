@@ -107,27 +107,36 @@ function jailbreakCountdown() {
   }, 1000);
 }
 
-// ========================================================
-// AppCache
+// ========================================================// AppCache
 // ========================================================
 
 function cacheProgress(e) {
-  const percent = Math.round((e.loaded / e.total) * 100);
   const status = document.getElementById("status");
+
+  if (!window.cacheDisplayPercent) {
+    window.cacheDisplayPercent = 1;
+  }
+
+  if (window.cacheDisplayPercent < 100) {
+    window.cacheDisplayPercent++;
+  }
+
+  const percent = window.cacheDisplayPercent;
 
   if (status) {
     status.textContent =
       "Installing offline cache: " + percent + "%";
   }
 
-  document.title = "Installing offline cache: " + percent + "%";
+  document.title =
+    "Installing offline cache: " + percent + "%";
 }
-
+ 
 function displayCacheProgress() {
   const status = document.getElementById("status");
 
   if (status) {
-    status.textContent = "Loading GoldHEN v2.4b18.10... Please Wait [100%]";
+    status.textContent = "Loading GoldHEN v2.4b18.10... Please Wait";
   }
 
   setTimeout(function () {
@@ -137,11 +146,11 @@ function displayCacheProgress() {
       status.classList.add("success");
     }
 
-    document.title = "✓";
+   document.title = "✓";
   }, 1000);
 
   setTimeout(function () {
-    document.title = "PS4 CSSFontFace Exploit";
+    document.title = "MUKALLA CITY HOST";
   }, 3000);
 }
 
