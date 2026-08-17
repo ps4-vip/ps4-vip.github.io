@@ -179,12 +179,11 @@ if (!navigator.onLine && window.applicationCache) {
   ) {
 
     if (window.zeekoShowLoading) {
-      window.zeekoShowLoading();
-    }
+  window.zeekoShowLoading();
+}
 
-    setTimeout(function () {
-  doJb();
-}, 3000);
+doJb();
+
   }
 
 }
