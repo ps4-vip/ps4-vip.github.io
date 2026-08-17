@@ -155,13 +155,11 @@ function displayCacheProgress() {
 }
 
 function offlineAutoJailbreak() {
-  if (!navigator.onLine) {
-    if (window.zeekoShowLoading) {
-      window.zeekoShowLoading();
-    }
-
-    doJb();
+  if (window.zeekoShowLoading) {
+    window.zeekoShowLoading();
   }
+
+  doJb();
 }
 
 // ========================================================
