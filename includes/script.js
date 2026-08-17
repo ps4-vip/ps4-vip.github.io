@@ -187,7 +187,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   jeilbrekBtn.disabled = true;
 
-  });
+  doJb();
+});
 
 // ========================================================
 // Background Console Auto Scroll
