@@ -173,11 +173,13 @@ document.addEventListener("DOMContentLoaded", function () {
     window.applicationCache.addEventListener("progress", cacheProgress, false);
 
     window.applicationCache.oncached = function () {
+        console.log("CACHE EVENT: cached");
       displayCacheProgress();
       offlineAutoJailbreak();
     };
 
     window.applicationCache.onupdateready = function () {
+        console.log("CACHE EVENT: updateready");
       displayCacheProgress();
       offlineAutoJailbreak();
     };
