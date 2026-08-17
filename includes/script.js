@@ -187,7 +187,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   jeilbrekBtn.disabled = true;
 
-  doJb();
+  // Offline Auto Jailbreak
+  if (!navigator.onLine && window.applicationCache) {
+    if (
+      window.applicationCache.status === window.applicationCache.CACHED ||
+      window.applicationCache.status === window.applicationCache.UPDATEREADY
+    ) {
+      doJb();
+    }
+  }
 });
 
 // ========================================================
