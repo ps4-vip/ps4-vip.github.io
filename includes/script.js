@@ -185,13 +185,13 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
-      if (
-        !navigator.onLine &&
-        window.applicationCache &&
-        window.applicationCache.status === window.applicationCache.CACHED
-      ) {
-        offlineAutoJailbreak();
-      }
+    if (
+      window.applicationCache &&
+      window.applicationCache.status === window.applicationCache.CACHED
+    ) {
+      displayCacheProgress();
+      offlineAutoJailbreak();
+    }
 
   // Selected exploit
 
