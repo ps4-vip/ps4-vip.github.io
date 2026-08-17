@@ -185,6 +185,14 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
+      if (
+        !navigator.onLine &&
+        window.applicationCache &&
+        window.applicationCache.status === window.applicationCache.CACHED
+      ) {
+        offlineAutoJailbreak();
+      }
+
   // Selected exploit
 
   if (exploitChain === "netctrl") {
