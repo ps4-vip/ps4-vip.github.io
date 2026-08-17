@@ -154,14 +154,6 @@ function displayCacheProgress() {
   }, 3000);
 }
 
-function offlineAutoJailbreak() {
-  if (window.zeekoShowLoading) {
-    window.zeekoShowLoading();
-  }
-
-  doJb();
-}
-
 // ========================================================
 // Startup
 // ========================================================
@@ -172,26 +164,10 @@ document.addEventListener("DOMContentLoaded", function () {
   if (window.applicationCache) {
     window.applicationCache.addEventListener("progress", cacheProgress, false);
 
-    window.applicationCache.oncached = function () {
-        console.log("CACHE EVENT: cached");
-      displayCacheProgress();
-      offlineAutoJailbreak();
-    };
+    window.applicationCache.oncached = displayCacheProgress;
 
-    window.applicationCache.onupdateready = function () {
-        console.log("CACHE EVENT: updateready");
-      displayCacheProgress();
-      offlineAutoJailbreak();
-    };
+    window.applicationCache.onupdateready = displayCacheProgress;
   }
-
-    if (
-      window.applicationCache &&
-      window.applicationCache.status === window.applicationCache.CACHED
-    ) {
-      displayCacheProgress();
-      offlineAutoJailbreak();
-    }
 
   // Selected exploit
 
@@ -211,6 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   jeilbrekBtn.disabled = true;
 
+  doJb();
 });
 
 // ========================================================
