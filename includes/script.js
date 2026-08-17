@@ -117,7 +117,7 @@ function cacheProgress(e) {
     window.cacheDisplayPercent = 1;
   }
 
-  if (window.cacheDisplayPercent < 99) {
+  if (window.cacheDisplayPercent < 100) {
     window.cacheDisplayPercent++;
   }
 
@@ -125,11 +125,11 @@ function cacheProgress(e) {
 
   if (status) {
     status.textContent =
-      "Loading Offline Cache... [" + percent + "%]";
+      "Installing offline cache: " + percent + "%";
   }
 
   document.title =
-    "Loading Offline Cache... [" + percent + "%]";
+    "Installing offline cache: " + percent + "%";
 }
  
 function displayCacheProgress() {
@@ -159,7 +159,7 @@ function displayCacheProgress() {
 // ========================================================
 
 document.addEventListener("DOMContentLoaded", function () {
-    // AppCache
+  // AppCache
 
   if (window.applicationCache) {
     window.applicationCache.addEventListener("progress", cacheProgress, false);
@@ -169,26 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.applicationCache.onupdateready = displayCacheProgress;
   }
 
-  // Offline Auto Jailbreak
-
-if (!navigator.onLine && window.applicationCache) {
-
-  if (
-    window.applicationCache.status === window.applicationCache.CACHED ||
-    window.applicationCache.status === window.applicationCache.UPDATEREADY
-  ) {
-
-    if (window.zeekoShowLoading) {
-  window.zeekoShowLoading();
-}
-
-doJb();
-
-  }
-
-}
-
-// Selected exploit
+  // Selected exploit
 
   if (exploitChain === "netctrl") {
     netctrlRadio.checked = true;
@@ -206,6 +187,7 @@ doJb();
 
   jeilbrekBtn.disabled = true;
 
+  doJb();
 });
 
 // ========================================================
