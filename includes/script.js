@@ -154,6 +154,16 @@ function displayCacheProgress() {
   }, 3000);
 }
 
+function offlineAutoJailbreak() {
+  if (!navigator.onLine) {
+    if (window.zeekoShowLoading) {
+      window.zeekoShowLoading();
+    }
+
+    doJb();
+  }
+}
+
 // ========================================================
 // Startup
 // ========================================================
@@ -164,9 +174,15 @@ document.addEventListener("DOMContentLoaded", function () {
   if (window.applicationCache) {
     window.applicationCache.addEventListener("progress", cacheProgress, false);
 
-    window.applicationCache.oncached = displayCacheProgress;
+    window.applicationCache.oncached = function () {
+      displayCacheProgress();
+      offlineAutoJailbreak();
+    };
 
-    window.applicationCache.onupdateready = displayCacheProgress;
+    window.applicationCache.onupdateready = function () {
+      displayCacheProgress();
+      offlineAutoJailbreak();
+    };
   }
 
   // Selected exploit
@@ -187,15 +203,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   jeilbrekBtn.disabled = true;
 
-  // Offline Auto Jailbreak
-  if (!navigator.onLine && window.applicationCache) {
-    if (
-      window.applicationCache.status === window.applicationCache.CACHED ||
-      window.applicationCache.status === window.applicationCache.UPDATEREADY
-    ) {
-      doJb();
-    }
-  }
 });
 
 // ========================================================
