@@ -35,78 +35,10 @@ kexForm.addEventListener("change", function (event) {
 // Jailbreak Button
 // ========================================================
 
-jeilbrekBtn.addEventListener("click", function () {
-  stopInterval();
-
-  jeilbrekBtn.disabled = true;
-
-  if (window.zeekoShowLoading) {
-    window.zeekoShowLoading();
-  }
-
-if (!navigator.onLine) {
-  doJb();
-}
-
-});
 
 // ========================================================
 // Auto Jailbreak
 // ========================================================
-
-checkbox.addEventListener("change", function () {
-  localStorage.setItem("autoJb", checkbox.checked);
-
-  if (checkbox.checked && !jeilbrekBtn.disabled) {
-    jailbreakCountdown();
-  } else {
-    stopInterval();
-  }
-});
-
-function stopInterval() {
-  if (timerId !== null) {
-    clearInterval(timerId);
-
-    timerId = null;
-  }
-
-  countdownText.classList.add("hidden");
-}
-
-function jailbreakCountdown() {
-  stopInterval();
-
-  let countdown = 5;
-
-  countdownText.classList.remove("hidden");
-
-  countdownText.textContent = "Auto JB in " + countdown + "...";
-
-  timerId = setInterval(function () {
-    countdown--;
-
-    if (countdown >= 0) {
-      countdownText.textContent = "Auto JB in " + countdown + "...";
-    }
-
-    if (countdown < 0) {
-      clearInterval(timerId);
-
-      timerId = null;
-
-      countdownText.textContent = "Executing...";
-
-      jeilbrekBtn.disabled = true;
-
-      if (window.zeekoShowLoading) {
-        window.zeekoShowLoading();
-      }
-
-      doJb();
-    }
-  }, 1000);
-}
 
 // ========================================================// AppCache
 // ========================================================
