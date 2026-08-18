@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# Version 3.1
+# Version 2.1
 CACHE:
 index.html
 includes/script.js
@@ -35,5 +35,3 @@ images/logo.jpg
 
 NETWORK:
 *
-
-# ZEEKO-FX-HOST v2
