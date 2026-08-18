@@ -1,4 +1,5 @@
 let timerId = null;
+let cacheReady = false;
 
 const jeilbrekBtn = document.getElementById("jeilbrek");
 const UAElement = document.getElementById("UA");
@@ -139,6 +140,8 @@ function displayCacheProgress() {
     status.textContent = "Loading GoldHEN v2.4b18.10... Please Wait";
   }
 
+  cacheReady = true;
+
   setTimeout(function () {
     if (status) {
       status.textContent = "GoldHEN v2.4b18.10 Loaded Successfully ✓";
@@ -171,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Offline Auto Jailbreak
 
-if (!navigator.onLine && window.applicationCache) {
+if (!navigator.onLine && window.applicationCache && cacheReady) {
 
   if (
     window.applicationCache.status === window.applicationCache.CACHED ||
