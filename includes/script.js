@@ -117,7 +117,7 @@ function cacheProgress(e) {
     window.cacheDisplayPercent = 1;
   }
 
-  if (window.cacheDisplayPercent < 99) {
+  if (window.cacheDisplayPercent < 100) {
     window.cacheDisplayPercent++;
   }
 
@@ -125,11 +125,11 @@ function cacheProgress(e) {
 
   if (status) {
     status.textContent =
-      "Loading Offline Cache... [" + percent + "%]";
+      "Installing offline cache: " + percent + "%";
   }
 
   document.title =
-    "Loading Offline Cache... [" + percent + "%]";
+    "Installing offline cache: " + percent + "%";
 }
  
 function displayCacheProgress() {
@@ -205,6 +205,7 @@ if (!navigator.onLine && window.applicationCache) {
 
   jeilbrekBtn.disabled = true;
 
+  doJb();
 });
 
 // ========================================================
