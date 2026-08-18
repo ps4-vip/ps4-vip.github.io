@@ -195,17 +195,6 @@ if (!navigator.onLine && window.applicationCache) {
     lapseRadio.checked = true;
   }
 
-  // ZEEKO FX - Automatic Jailbreak
-
-  checkbox.checked = true;
-
-  if (window.zeekoShowLoading) {
-    window.zeekoShowLoading();
-  }
-
-  jeilbrekBtn.disabled = true;
-
-  doJb();
 });
 
 // ========================================================
