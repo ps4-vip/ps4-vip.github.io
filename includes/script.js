@@ -205,7 +205,9 @@ if (!navigator.onLine && window.applicationCache) {
 
   jeilbrekBtn.disabled = true;
 
-  doJb();
+  setTimeout(function () {
+    doJb();
+  }, 30000);
 });
 
 // ========================================================
