@@ -41,18 +41,17 @@ function cacheProgress(e) {
 
   if (status) {
     status.textContent =
-      "Installing offline cache: " + percent + "%";
+      "Loading Offline Cache... [" + percent + "%]";
   }
 
   document.title =
-    "Installing offline cache: " + percent + "%";
+    "Loading Offline Cache... [" + percent + "%]";
 }
  
 function displayCacheProgress() {
   const status = document.getElementById("status");
 
   if (status) {
-    status.textContent = "Loading GoldHEN v2.4b18.10... Please Wait";
   }
 
   setTimeout(function () {
@@ -75,6 +74,11 @@ function displayCacheProgress() {
 // ========================================================
 
 document.addEventListener("DOMContentLoaded", function () {
+
+  if (window.zeekoShowLoading) {
+    window.zeekoShowLoading();
+  }
+
   // AppCache
 
   if (window.applicationCache) {
@@ -107,10 +111,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ZEEKO FX - Automatic Jailbreak
 
-
-  if (window.zeekoShowLoading) {
-    window.zeekoShowLoading();
-  }
 
 });
 
