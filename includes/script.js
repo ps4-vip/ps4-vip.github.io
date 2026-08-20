@@ -74,15 +74,6 @@ function displayCacheProgress() {
 
   cacheReady = true;
 
-  setTimeout(function () {
-    if (status) {
-      status.textContent = "GoldHEN v2.4b18.10 Loaded Successfully ✓";
-      status.classList.remove("loading");
-      status.classList.add("success");
-    }
-
-   document.title = "✓";
-  }, 1000);
 
   setTimeout(function () {
     document.title = "MUKALLA CITY HOST";
@@ -106,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Offline Auto Jailbreak
 
-if (!navigator.onLine && window.applicationCache && cacheReady) {
+if (!navigator.onLine && window.applicationCache) {
 
   if (
     window.applicationCache.status === window.applicationCache.CACHED ||
