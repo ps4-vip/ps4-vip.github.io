@@ -1,15 +1,7 @@
-let timerId = null;
-let cacheReady = false;
 
-const jeilbrekBtn = document.getElementById("jeilbrek");
 const UAElement = document.getElementById("UA");
 
-const countdownText = document.getElementById("countdown");
-const checkbox = document.getElementById("autoJbInput");
 
-// Auto JB (default OFF)
-const storedAutoJb = localStorage.getItem("autoJb");
-const autoJbValue = storedAutoJb !== null ? storedAutoJb === "true" : false;
 
 // Kernel exploit
 let exploitChain = localStorage.getItem("exploitChain") || "lapse";
@@ -30,15 +22,6 @@ kexForm.addEventListener("change", function (event) {
 
   localStorage.setItem("exploitChain", exploitChain);
 });
-
-// ========================================================
-// Jailbreak Button
-// ========================================================
-
-
-// ========================================================
-// Auto Jailbreak
-// ========================================================
 
 // ========================================================// AppCache
 // ========================================================
@@ -72,8 +55,15 @@ function displayCacheProgress() {
     status.textContent = "Loading GoldHEN v2.4b18.10... Please Wait";
   }
 
-  cacheReady = true;
+  setTimeout(function () {
+    if (status) {
+      status.textContent = "GoldHEN v2.4b18.10 Loaded Successfully ✓";
+      status.classList.remove("loading");
+      status.classList.add("success");
+    }
 
+   document.title = "✓";
+  }, 1000);
 
   setTimeout(function () {
     document.title = "MUKALLA CITY HOST";
@@ -85,40 +75,41 @@ function displayCacheProgress() {
 // ========================================================
 
 document.addEventListener("DOMContentLoaded", function () {
-    // AppCache
+  // AppCache
 
   if (window.applicationCache) {
     window.applicationCache.addEventListener("progress", cacheProgress, false);
 
-    window.applicationCache.oncached = displayCacheProgress;
+    window.applicationCache.oncached = function () {
+      displayCacheProgress();
 
-    window.applicationCache.onupdateready = displayCacheProgress;
+      if (!navigator.onLine) {
+        doJb();
+      }
+    };
+
+    window.applicationCache.onupdateready = function () {
+      displayCacheProgress();
+
+      if (!navigator.onLine) {
+        doJb();
+      }
+    };
   }
 
-  // Offline Auto Jailbreak
-
-if (!navigator.onLine && window.applicationCache) {
-
-  if (
-    window.applicationCache.status === window.applicationCache.CACHED ||
-    window.applicationCache.status === window.applicationCache.UPDATEREADY
-  ) {
-
-    if (window.zeekoShowLoading) {
-      window.zeekoShowLoading();
-    }
-
-    doJb();
-  }
-
-}
-
-// Selected exploit
+  // Selected exploit
 
   if (exploitChain === "netctrl") {
     netctrlRadio.checked = true;
   } else {
     lapseRadio.checked = true;
+  }
+
+  // ZEEKO FX - Automatic Jailbreak
+
+
+  if (window.zeekoShowLoading) {
+    window.zeekoShowLoading();
   }
 
 });
