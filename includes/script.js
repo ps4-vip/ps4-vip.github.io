@@ -1,14 +1,7 @@
-let timerId = null;
 
-const jeilbrekBtn = document.getElementById("jeilbrek");
 const UAElement = document.getElementById("UA");
 
-const countdownText = document.getElementById("countdown");
-const checkbox = document.getElementById("autoJbInput");
 
-// Auto JB (default OFF)
-const storedAutoJb = localStorage.getItem("autoJb");
-const autoJbValue = storedAutoJb !== null ? storedAutoJb === "true" : false;
 
 // Kernel exploit
 let exploitChain = localStorage.getItem("exploitChain") || "lapse";
@@ -29,83 +22,6 @@ kexForm.addEventListener("change", function (event) {
 
   localStorage.setItem("exploitChain", exploitChain);
 });
-
-// ========================================================
-// Jailbreak Button
-// ========================================================
-
-jeilbrekBtn.addEventListener("click", function () {
-  stopInterval();
-
-  jeilbrekBtn.disabled = true;
-
-  if (window.zeekoShowLoading) {
-    window.zeekoShowLoading();
-  }
-
-if (!navigator.onLine) {
-  doJb();
-}
-
-});
-
-// ========================================================
-// Auto Jailbreak
-// ========================================================
-
-checkbox.addEventListener("change", function () {
-  localStorage.setItem("autoJb", checkbox.checked);
-
-  if (checkbox.checked && !jeilbrekBtn.disabled) {
-    jailbreakCountdown();
-  } else {
-    stopInterval();
-  }
-});
-
-function stopInterval() {
-  if (timerId !== null) {
-    clearInterval(timerId);
-
-    timerId = null;
-  }
-
-  countdownText.classList.add("hidden");
-}
-
-function jailbreakCountdown() {
-  stopInterval();
-
-  let countdown = 5;
-
-  countdownText.classList.remove("hidden");
-
-  countdownText.textContent = "Auto JB in " + countdown + "...";
-
-  timerId = setInterval(function () {
-    countdown--;
-
-    if (countdown >= 0) {
-      countdownText.textContent = "Auto JB in " + countdown + "...";
-    }
-
-    if (countdown < 0) {
-      clearInterval(timerId);
-
-      timerId = null;
-
-      countdownText.textContent = "Executing...";
-
-      jeilbrekBtn.disabled = true;
-
-      if (window.zeekoShowLoading) {
-        window.zeekoShowLoading();
-      }
-
-      doJb();
-    }
-  }, 1000);
-}
 
 // ========================================================// AppCache
 // ========================================================
@@ -164,9 +80,21 @@ document.addEventListener("DOMContentLoaded", function () {
   if (window.applicationCache) {
     window.applicationCache.addEventListener("progress", cacheProgress, false);
 
-    window.applicationCache.oncached = displayCacheProgress;
+    window.applicationCache.oncached = function () {
+      displayCacheProgress();
 
-    window.applicationCache.onupdateready = displayCacheProgress;
+      if (!navigator.onLine) {
+        doJb();
+      }
+    };
+
+    window.applicationCache.onupdateready = function () {
+      displayCacheProgress();
+
+      if (!navigator.onLine) {
+        doJb();
+      }
+    };
   }
 
   // Selected exploit
@@ -179,15 +107,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ZEEKO FX - Automatic Jailbreak
 
-  checkbox.checked = true;
 
   if (window.zeekoShowLoading) {
     window.zeekoShowLoading();
   }
 
-  jeilbrekBtn.disabled = true;
-
-  doJb();
 });
 
 // ========================================================
