@@ -48,6 +48,17 @@ function cacheProgress(e) {
     "Loading Offline Cache... [" + percent + "%]";
 }
  
+let zeekoAutoJbStarted = false;
+
+function startAutoJbAfterCache() {
+  if (zeekoAutoJbStarted) return;
+  zeekoAutoJbStarted = true;
+
+  setTimeout(function () {
+    doJb();
+  }, 5000);
+}
+
 function displayCacheProgress() {
   const status = document.getElementById("status");
 
@@ -57,6 +68,7 @@ function displayCacheProgress() {
   setTimeout(function () {
     if (status) {
       status.textContent = "GoldHEN v2.4b18.10 Loaded Successfully ✓";
+      startAutoJbAfterCache();
       status.classList.remove("loading");
       status.classList.add("success");
     }
@@ -81,21 +93,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // AppCache
 
-  if (window.applicationCache) {
-    window.applicationCache.addEventListener("progress", cacheProgress, false);
+    if (window.applicationCache) {
+      const appCache = window.applicationCache;
 
-    window.applicationCache.oncached = function () {
-      displayCacheProgress();
+      appCache.addEventListener("progress", cacheProgress, false);
 
-    };
+      appCache.oncached = displayCacheProgress;
+      appCache.onupdateready = displayCacheProgress;
 
-    window.applicationCache.onupdateready = function () {
-      displayCacheProgress();
+      // If AppCache is already ready, trigger completion flow.
+      if (
+        appCache.status === appCache.IDLE ||
+        appCache.status === appCache.UPDATEREADY
+      ) {
+        displayCacheProgress();
+      }
+    }
 
-    };
-  }
-
-  // Selected exploit
+    // Selected exploit
 
   if (exploitChain === "netctrl") {
     netctrlRadio.checked = true;
@@ -103,36 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
     lapseRadio.checked = true;
   }
 
-  // ZEEKO FX - Automatic Offline Jailbreak
-  // Start only after AppCache is ready, with no countdown text.
-  let autoJbStarted = false;
 
-  function startOfflineAutoJb() {
-    if (autoJbStarted) return;
-    autoJbStarted = true;
-
-    setTimeout(function () {
-      doJb();
-    }, 5000);
-  }
-
-  if (window.applicationCache) {
-    const appCache = window.applicationCache;
-
-    if (
-      appCache.status === appCache.IDLE ||
-      appCache.status === appCache.UPDATEREADY
-    ) {
-      startOfflineAutoJb();
-    } else {
-      appCache.addEventListener("cached", startOfflineAutoJb, false);
-      appCache.addEventListener("updateready", startOfflineAutoJb, false);
-    }
-  } else {
-    setTimeout(function () {
-      doJb();
-    }, 5000);
-  }
 
 });
 
