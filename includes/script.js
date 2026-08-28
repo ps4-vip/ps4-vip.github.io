@@ -87,17 +87,11 @@ document.addEventListener("DOMContentLoaded", function () {
     window.applicationCache.oncached = function () {
       displayCacheProgress();
 
-      if (!navigator.onLine) {
-        doJb();
-      }
     };
 
     window.applicationCache.onupdateready = function () {
       displayCacheProgress();
 
-      if (!navigator.onLine) {
-        doJb();
-      }
     };
   }
 
@@ -110,8 +104,27 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ZEEKO FX - Automatic Jailbreak
+  let countdown = 5;
+  const countdownTimer = setInterval(function () {
+    const status = document.getElementById("status");
 
-  doJb();
+    if (status) {
+      status.textContent = "Auto Jailbreak in " + countdown + "...";
+    }
+
+    if (countdown <= 0) {
+      clearInterval(countdownTimer);
+
+      if (status) {
+        status.textContent = "Executing...";
+      }
+
+      doJb();
+      return;
+    }
+
+    countdown--;
+  }, 1000);
 
 });
 
