@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# Version 2.2
+# Version 2.3
 CACHE:
 index.html
 includes/script.js
@@ -32,5 +32,6 @@ src/ps4/patches/900.bin
 src/ps4/patches/903.bin
 src/ps4/patches/950.bin
 
+images/logo.jpg
 NETWORK:
 *

@@ -111,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ZEEKO FX - Automatic Jailbreak
 
+  doJb();
 
 });
 
