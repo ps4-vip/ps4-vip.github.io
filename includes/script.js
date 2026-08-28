@@ -103,28 +103,36 @@ document.addEventListener("DOMContentLoaded", function () {
     lapseRadio.checked = true;
   }
 
-  // ZEEKO FX - Automatic Jailbreak
-  let countdown = 5;
-  const countdownTimer = setInterval(function () {
-    const status = document.getElementById("status");
+  // ZEEKO FX - Automatic Offline Jailbreak
+  // Start only after AppCache is ready, with no countdown text.
+  let autoJbStarted = false;
 
-    if (status) {
-      status.textContent = "Auto Jailbreak in " + countdown + "...";
-    }
+  function startOfflineAutoJb() {
+    if (autoJbStarted) return;
+    autoJbStarted = true;
 
-    if (countdown <= 0) {
-      clearInterval(countdownTimer);
-
-      if (status) {
-        status.textContent = "Executing...";
-      }
-
+    setTimeout(function () {
       doJb();
-      return;
-    }
+    }, 5000);
+  }
 
-    countdown--;
-  }, 1000);
+  if (window.applicationCache) {
+    const appCache = window.applicationCache;
+
+    if (
+      appCache.status === appCache.IDLE ||
+      appCache.status === appCache.UPDATEREADY
+    ) {
+      startOfflineAutoJb();
+    } else {
+      appCache.addEventListener("cached", startOfflineAutoJb, false);
+      appCache.addEventListener("updateready", startOfflineAutoJb, false);
+    }
+  } else {
+    setTimeout(function () {
+      doJb();
+    }, 5000);
+  }
 
 });
 
