@@ -57,9 +57,9 @@ function startAutoJbAfterCache() {
   setTimeout(function () {
       const traceStatus = document.getElementById("status");
       if (traceStatus) traceStatus.textContent = "TRACE: AUTO-JB STARTED";
-      doJb();
+      if (!navigator.onLine) doJb();
       if (traceStatus) traceStatus.textContent = "TRACE: AUTO-JB CALLED";
-  }, 5000);
+  }, 2000);
 }
 
 function displayCacheProgress() {
