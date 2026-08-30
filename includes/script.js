@@ -97,6 +97,19 @@ document.addEventListener("DOMContentLoaded", function () {
       const appCache = window.applicationCache;
 
         const traceStatus = document.getElementById("status");
+
+        let lastAppCacheStatus = appCache.status;
+
+        const appCacheStatusTimer = setInterval(function () {
+          if (appCache.status !== lastAppCacheStatus) {
+            lastAppCacheStatus = appCache.status;
+
+            if (traceStatus) {
+              traceStatus.textContent =
+                "TRACE: APPCACHE STATUS CHANGED = " + lastAppCacheStatus;
+            }
+          }
+        }, 1000);
         if (traceStatus) {
           traceStatus.textContent = "TRACE: APPCACHE FOUND / STATUS = " + appCache.status;
         }
