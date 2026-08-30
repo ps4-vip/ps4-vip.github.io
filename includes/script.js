@@ -66,6 +66,7 @@ function displayCacheProgress() {
   const status = document.getElementById("status");
 
   if (status) {
+    status.textContent = "TRACE: displayCacheProgress() ENTERED";
   }
 
   setTimeout(function () {
