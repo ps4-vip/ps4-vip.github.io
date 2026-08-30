@@ -96,6 +96,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (window.applicationCache) {
       const appCache = window.applicationCache;
 
+        const traceStatus = document.getElementById("status");
+        if (traceStatus) {
+          traceStatus.textContent = "TRACE: APPCACHE FOUND / STATUS = " + appCache.status;
+        }
       appCache.addEventListener("progress", cacheProgress, false);
 
       appCache.oncached = displayCacheProgress;
