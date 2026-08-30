@@ -112,6 +112,13 @@ document.addEventListener("DOMContentLoaded", function () {
               traceStatus.textContent =
                 "TRACE: APPCACHE STATUS CHANGED = " + lastAppCacheStatus;
             }
+
+            if (
+              appCache.status === appCache.IDLE ||
+              appCache.status === appCache.UPDATEREADY
+            ) {
+              displayCacheProgress();
+            }
           }
         }, 1000);
         if (traceStatus) {
