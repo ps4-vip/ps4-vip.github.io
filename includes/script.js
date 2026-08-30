@@ -66,7 +66,7 @@ function displayCacheProgress() {
   const status = document.getElementById("status");
 
   if (status) {
-    status.textContent = "TRACE: displayCacheProgress() ENTERED";
+    status.textContent = "Loading GoldHEN v2.4b18.10... Please Wait";
   }
 
   setTimeout(function () {
