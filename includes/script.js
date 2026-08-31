@@ -55,10 +55,7 @@ function startAutoJbAfterCache() {
   zeekoAutoJbStarted = true;
 
   setTimeout(function () {
-      const traceStatus = document.getElementById("status");
-      if (traceStatus) traceStatus.textContent = "TRACE: AUTO-JB STARTED";
       if (!navigator.onLine) doJb();
-      if (traceStatus) traceStatus.textContent = "TRACE: AUTO-JB CALLED";
   }, 2000);
 }
 
@@ -107,11 +104,6 @@ document.addEventListener("DOMContentLoaded", function () {
           if (appCache.status !== lastAppCacheStatus) {
             lastAppCacheStatus = appCache.status;
 
-            if (traceStatus) {
-              traceStatus.textContent =
-                "TRACE: APPCACHE STATUS CHANGED = " + lastAppCacheStatus;
-            }
-
             if (
               appCache.status === appCache.IDLE ||
               appCache.status === appCache.UPDATEREADY
@@ -120,9 +112,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           }
         }, 1000);
-        if (traceStatus) {
-          traceStatus.textContent = "TRACE: APPCACHE FOUND / STATUS = " + appCache.status;
-        }
       appCache.addEventListener("progress", cacheProgress, false);
 
       appCache.oncached = displayCacheProgress;
