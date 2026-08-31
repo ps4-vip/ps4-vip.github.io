@@ -56,14 +56,16 @@ function startAutoJbAfterCache() {
 
   setTimeout(function () {
       const traceStatus = document.getElementById("status");
+      if (traceStatus) traceStatus.textContent = "TRACE: AUTO-JB STARTED";
       if (!navigator.onLine) doJb();
+      if (traceStatus) traceStatus.textContent = "TRACE: AUTO-JB CALLED";
   }, 2000);
 }
 
 function displayCacheProgress() {
   const status = document.getElementById("status");
 
-  if (status && !navigator.onLine) {
+  if (status) {
     status.textContent = "Loading GoldHEN v2.4b18.10... Please Wait";
   }
 
@@ -105,6 +107,10 @@ document.addEventListener("DOMContentLoaded", function () {
           if (appCache.status !== lastAppCacheStatus) {
             lastAppCacheStatus = appCache.status;
 
+            if (traceStatus) {
+              traceStatus.textContent =
+                "TRACE: APPCACHE STATUS CHANGED = " + lastAppCacheStatus;
+            }
 
             if (
               appCache.status === appCache.IDLE ||
@@ -114,6 +120,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           }
         }, 1000);
+        if (traceStatus) {
+          traceStatus.textContent = "TRACE: APPCACHE FOUND / STATUS = " + appCache.status;
+        }
       appCache.addEventListener("progress", cacheProgress, false);
 
       appCache.oncached = displayCacheProgress;
