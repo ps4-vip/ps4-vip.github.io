@@ -62,10 +62,6 @@ function startAutoJbAfterCache() {
 function displayCacheProgress() {
   const status = document.getElementById("status");
 
-  if (status) {
-    status.textContent = "Loading GoldHEN v2.4b18.10... Please Wait";
-  }
-
   setTimeout(function () {
     if (status) {
       startAutoJbAfterCache();
