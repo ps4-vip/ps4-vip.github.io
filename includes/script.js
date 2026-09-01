@@ -64,7 +64,7 @@ function displayCacheProgress() {
 
   setTimeout(function () {
     if (status) {
-      status.textContent = "GoldHEN v2.4b18.10 Loaded Successfully ✓";
+        if (navigator.onLine) status.textContent = "GoldHEN v2.4b18.10 Loaded Successfully ✓";
       startAutoJbAfterCache();
       status.classList.remove("loading");
       status.classList.add("success");
