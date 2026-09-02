@@ -1,6 +1,11 @@
 <!doctype html>
-<html lang="en" manifest="cache.manifest">
+<html lang="en">
   <head>
+    <script>
+      if (window.applicationCache && window.applicationCache.status === window.applicationCache.UNCACHED) {
+        window.location.replace("cache.html");
+      }
+    </script>
     <meta charset="UTF-8" />
 
     <meta

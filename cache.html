@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" manifest="cache.manifest">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Loading Offline Cache...</title>
+</head>
+<body>
+  <div id="status">Loading Offline Cache... [0%]</div>
+
+  <script>
+    (function () {
+      const status = document.getElementById("status");
+      const appCache = window.applicationCache;
+      let percent = 0;
+
+      function progress(e) {
+        if (e.lengthComputable) {
+          percent = Math.round((e.loaded / e.total) * 100);
+        } else if (percent < 99) {
+          percent++;
+        }
+
+        status.textContent = "Loading Offline Cache... [" + percent + "%]";
+      }
+
+      function complete() {
+        percent = 100;
+        status.textContent = "Offline Cache Installed Successfully ✓";
+
+        setTimeout(function () {
+          window.location.replace("index.html");
+        }, 1000);
+      }
+
+      if (!appCache) {
+        status.textContent = "Offline Cache Unsupported";
+        return;
+      }
+
+      appCache.addEventListener("progress", progress, false);
+      appCache.addEventListener("cached", complete, false);
+      appCache.addEventListener("updateready", complete, false);
+
+      if (
+        appCache.status === appCache.IDLE ||
+        appCache.status === appCache.UPDATEREADY
+      ) {
+        complete();
+      }
+    })();
+  </script>
+</body>
+</html>

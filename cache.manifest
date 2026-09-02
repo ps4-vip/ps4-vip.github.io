@@ -2,6 +2,7 @@ CACHE MANIFEST
 
 # Version 2.5
 CACHE:
+cache.html
 index.html
 includes/script.js
 includes/style.css
