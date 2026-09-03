@@ -28,16 +28,15 @@ kexForm.addEventListener("change", function (event) {
 
 function cacheProgress(e) {
   const status = document.getElementById("status");
+  let percent = 0;
 
-  if (!window.cacheDisplayPercent) {
-    window.cacheDisplayPercent = 1;
+  if (e && e.lengthComputable && e.total > 0) {
+    percent = Math.round((e.loaded / e.total) * 100);
   }
 
-  if (window.cacheDisplayPercent < 100) {
-    window.cacheDisplayPercent++;
+  if (percent > 100) {
+    percent = 100;
   }
-
-  const percent = window.cacheDisplayPercent;
 
   if (status) {
     status.textContent =
