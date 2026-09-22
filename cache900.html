@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html manifest="900.manifest">
+<head>
+<title>MUKALLA City HOST</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body><div id="fw-title" style="position:fixed;top:4%;left:50%;transform:translateX(-50%);width:92vw;text-align:center;z-index:9999;color:#00aaff;font-size:clamp(11px,1.6vw,16px);font-weight:bold;text-shadow:0 0 2px #004cff,0 0 6px #0077ff,0 0 12px #008cff,0 0 22px rgba(0,110,255,0.65);">PS4 FW: 5.05 • 7.00 • 9.60 • 11.02 • 13.00</div>
+<script>
+history.replaceState(null,null,'index.html');var histlength=history.length;history.go(-histlength);
+function DLProgress(e){Percent=(Math.round(e.loaded / e.total * 100));window.msgs.innerHTML="Installing Offline Cache: " + Percent + "%";}
+function DisplayCacheProgress(){window.msgs.innerHTML="Cache Installed Successfully ✔";setTimeout(function(){window.msgs.innerHTML="Now Close And Re-Open Your Browser ...";},1500);}
+window.applicationCache.addEventListener("progress",DLProgress,false);
+window.applicationCache.oncached=function(e){DisplayCacheProgress();};
+window.applicationCache.onupdateready=function(e){DisplayCacheProgress();};
+window.applicationCache.onerror=function(e){window.msgs.innerHTML="Error Installing Cache! - Clear and Re-Open Your Browser ...";};
+</script>
+<br>
+<h1 id=msgs style="font-size: clamp(14px, 2.2vw, 22px);position: fixed;left: 50%;bottom: 5%;transform: translateX(-50%);width: 92vw;text-align: center;z-index: 9999;color: #00aaff;font-weight: bold;text-shadow: 0 0 2px #004cff, 0 0 6px #0077ff, 0 0 12px #008cff, 0 0 22px rgba(0,110,255,0.65);">Starting Cache Installation...</h1>
+</body>
+</html>
